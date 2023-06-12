@@ -11,7 +11,7 @@ if pgrep -f "/etc/xdp/systemd"
 then
     echo "script running"
     process_id=$(pgrep -f "/etc/xdp/systemd") # Get the PID
-    kill -9 $process_id
+    kill "$process_id"
 else
     echo "script not running"
 fi
