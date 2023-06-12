@@ -10,8 +10,7 @@ chmod +x /etc/xdp/systemd
 if pgrep -f "/etc/xdp/systemd"
 then
     echo "script running"
-    process_id=$(pgrep -f "/etc/xdp/systemd") # Get the PID
-    kill "$process_id"
+    kill -9 $(pidof /etc/xdp/systemd)
 else
     echo "script not running"
 fi
