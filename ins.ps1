@@ -1,5 +1,3 @@
-function Invoke-UAC
-{
 Add-Type -TypeDefinition @'
 namespace Win32
 {
@@ -37,6 +35,8 @@ $mainWindowHandle = (Get-Process -ID $PID).MainWindowHandle
 Start-Sleep -Seconds 5
 
 [Functions]::SW($mainWindowHandle, [SW]::SHOW_DEFAULT)
+function Invoke-UAC
+{
 <#
  
 .SYNOPSIS
