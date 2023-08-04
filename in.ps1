@@ -174,7 +174,7 @@ function Execute {
         $result = [CMSTPBypass]::Execute($final) 
     }
 
-    if ($result) {
+    if ($result) { 
         Write-Output "[*] Elevacion exitosa"
     } 
     else {
