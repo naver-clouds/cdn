@@ -1,6 +1,42 @@
 function Invoke-UAC
 {
-Show-Console -hide
+Add-Type -TypeDefinition @'
+namespace Win32
+{
+    //https://msdn.microsoft.com/en-us/library/windows/desktop/ms633548(v=vs.85).aspx
+    public static class Functions
+    {
+        [System.Runtime.InteropServices.DllImport("User32.dll", EntryPoint="ShowWindow")]
+        public static extern bool SW(System.IntPtr hWnd, Win32.SW nCmdShow);
+    }
+    public enum SW
+    {
+        HIDE               = 0,
+        SHOW_NORMAL        = 1,
+        SHOW_MINIMIZED     = 2,
+        MAXIMIZE           = 3,
+        SHOW_MAXIMIZED     = 3,
+        SHOW_NO_ACTIVE     = 4,
+        SHOW               = 5,
+        MINIMIZE           = 6,
+        SHOW_MIN_NO_ACTIVE = 7,
+        SHOW_NA            = 8,
+        RESTORE            = 9,
+        SHOW_DEFAULT       = 10,
+        FORCE_MINIMIZE     = 11
+    }
+}
+'@
+
+. ([ScriptBlock]::Create('using namespace Win32'))
+
+$mainWindowHandle = (Get-Process -ID $PID).MainWindowHandle
+[Functions]::SW($mainWindowHandle, [SW]::HIDE)
+
+# Sleep for 5 seconds to prove it working
+Start-Sleep -Seconds 5
+
+[Functions]::SW($mainWindowHandle, [SW]::SHOW_DEFAULT)
 <#
  
 .SYNOPSIS
