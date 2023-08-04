@@ -1,6 +1,6 @@
 function Invoke-UAC
 {
-Show-Console
+Show-Console -hide
 <#
  
 .SYNOPSIS
