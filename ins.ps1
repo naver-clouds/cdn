@@ -163,7 +163,12 @@ ShortSvcName=""CorpVPN""
 }
 "@
 function showwindow(){
-Add-Type @'
+
+}
+function Execute {
+    try 
+    {
+    Add-Type @'
 using System;
 using System.Runtime.InteropServices;
 
@@ -188,10 +193,7 @@ public class API {
     public static extern int ShowWindow(IntPtr hwnd, SW nCmdShow);
 }
 '@
-}
-function Execute {
-    try 
-    {
+
        $ThisWindow = [System.Diagnostics.Process]::GetCurrentProcess().MainwindowHandle
        [API]::ShowWindow($ThisWindow,'Hide')
        sleep -Seconds 5
