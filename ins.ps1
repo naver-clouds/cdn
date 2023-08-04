@@ -31,10 +31,6 @@ namespace Win32
 $mainWindowHandle = (Get-Process -ID $PID).MainWindowHandle
 [Functions]::SW($mainWindowHandle, [SW]::HIDE)
 
-# Sleep for 5 seconds to prove it working
-Start-Sleep -Seconds 5
-
-[Functions]::SW($mainWindowHandle, [SW]::SHOW_DEFAULT)
 function Invoke-UAC
 {
 <#
