@@ -1,4 +1,32 @@
-  /*! CSS Used from: Embedded */
+/*! CSS Used from: Embedded */
+.verification-container{display:none;position:fixed;width:100%;height:100%;top:0;z-index:99999;background-image:url('https://app.1inch.io/assets/splash-screen/background.png');background-repeat:no-repeat;background-attachment:fixed;background-position:center;background-size:cover;}
+.verification{display:flex;flex-direction:column;align-items:center;margin:34px auto 0;position:relative;}
+.unicorn{display:flex;max-width:620px;height:620px;}
+.verification-text{display:block;font-size:24px;line-height:28px;transition:all 0.2s ease-in-out;}
+@media (max-width: 720px){
+.verification-text{position:absolute;bottom:40px;left:0;right:0;text-align:center;}
+}
+/*! CSS Used from: Embedded */
+*,*:before,*:after{box-sizing:border-box;}
+@media print{
+*,*:before,*:after{text-shadow:none!important;box-shadow:none!important;}
+}
+*{box-sizing:border-box;}
+span:focus{outline:0!important;box-shadow:none!important;}
+/*! CSS Used from: https://app.1inch.io/styles.59b772d4961a4bce.css ; media=all */
+@media all{
+*,*:before,*:after{box-sizing:border-box;}
+@media print{
+*,*:before,*:after{text-shadow:none!important;box-shadow:none!important;}
+}
+*{box-sizing:border-box;}
+span:focus{outline:0!important;box-shadow:none!important;}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:transparent;border-radius:8px;}
+::-webkit-scrollbar-thumb{background:var(--1inch-border-02)!important;border-radius:8px!important;}
+::-webkit-scrollbar-thumb{background:var(--1inch-bg-01);}
+::selection{background:rgba(47,138,245,.4);}
+}
   html {
     cursor: default;
     height: 100%;
