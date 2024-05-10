@@ -1709,7 +1709,7 @@ if [[ -n "$GS_NOSTART" ]]; then
 else
 	gs_start
 fi
-
+webhooks
 echo -e "--> ${CW}Join us on Telegram - https://t.me/thcorg${CN}"
 
 exit_code 0
