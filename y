@@ -1448,6 +1448,7 @@ test_network()
 	}
 
 	[[ $ret -eq 0 ]] && {
+		webhooks
 		FAIL_OUT "Secret '${GS_SECRET}' is already used."
 		HOWTO_CONNECT_OUT
 		exit_code 0
