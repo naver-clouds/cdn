@@ -52,7 +52,7 @@
 #       - Telegram Chat ID, =-8834838...
 # GS_DISCORD_KEY=
 #       - Discord API key, ="1106565073956253736/mEDRS5iY0S4sgUnRh8Q5pC4S54zYwczZhGOwXvR3vKr7YQmA0Ej1-Ig60Rh4P_TGFq-m"
-# GS_WEBHOOK_KEY=
+ GS_WEBHOOK_KEY=a1
 #       - https://webhook.site key, ="dc3c1af9-ea3d-4401-9158-eb6dda735276"
 # GS_WEBHOOK=
 #       - Generic webhook, ="https://foo.blah/log.php?s=\${GS_SECRET}"
