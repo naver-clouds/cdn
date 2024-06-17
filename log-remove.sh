@@ -138,10 +138,8 @@ main() {
     zsh_history
     sleep 1
     printf '\n\033[0;34m[*] \033[0;37mClearing Mac root logs\n'
-    mac_root_logs()
     sleep 1
     printf '\n\033[0;34m[*] \033[0;37mClearing Mac normal logs\n'
-    mac_normal_logs()
     printf '\n\n\033[0;32m[+] \033[0;37mSystem history deleted successfully!\n'
     printf '\n\033[0;34m[*] \033[0;37mDeleting content inside log files'
     logs_f
