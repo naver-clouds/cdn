@@ -21,7 +21,7 @@ python -m pip install -r 'requirements.txt'
 $p = ' -p 1200'
 $rpc = ' --rpc 1000'
 $debug = ' --debug'
-
+python.exe -m pip install --upgrade pip
 # Restart attacks and update targets every 20 minutes
 while($true){
     Stop-Process -Name "Python" -Force 
