@@ -9,6 +9,10 @@ choco install -y git # Install GIT
 
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User") # Refresh env variables
 
+$p = ' -p 1200'
+$rpc = ' --rpc 1000'
+$debug = ' --debug'
+
 ###
 Set-Location '~'
 Remove-Item 'MHDDoS' -Recurse -Force
