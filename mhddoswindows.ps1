@@ -23,4 +23,4 @@ $p = ' -p 1200'
 $rpc = ' --rpc 1000'
 $debug = ' --debug'
 python start.py cookie "http://38.126.52.120:80" 0  7250  proxy411221131.txt  2236000 2236000 true
-}
+
