@@ -59,4 +59,3 @@ python.exe -m pip install --upgrade pip
 python -m pip install -r 'requirements.txt'
 
 
-python start.py cookie http://38.126.52.120:80  0  7250  proxy411221131.txt  2236000 2236000 true
