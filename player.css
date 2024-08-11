@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    color: #fff;
+    background-color: black;
+    font-size: 24px;
+}
+  .div_pop{
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: -webkit-fill-available;
+      height: 100vh;
+      cursor: pointer;
+  }
+#pop {
+    z-index: 9995;
+}
+
+#pop0 {
+    z-index: 9995;
+}
+
+#pop1 {
+    z-index: 9996;
+}
+
+#pop2 {
+    z-index: 9997;
+}
+
+#pop3 {
+    z-index: 9998;
+}
+
+#pop4 {
+    z-index: 9999;
+}
+
+#pop5 {
+    z-index: 99999;
+}
+#player {
+    height: 100vh !important;
+}
+
+#horizon {
+    display: table;
+    height: 100vh;
+    position: static;
+    width: 100%;
+    background-color: #151515;
+}
+
+#sun {
+    display: table-cell;
+    vertical-align: middle;
+    position: static;
+    margin: 0 auto;
+}
+
+.preloader {
+    position: fixed;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1001;
+    background-color: #202124;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.preloader span {
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-top: 15px;
+    color: #d4d4d4;
+}
+
+.preloader .preloader-icon {
+    border: 2px solid #eee;
+    border-radius: 50%;
+    border-top: 2px solid #5066e1;
+    width: 70px;
+    height: 70px;
+    -webkit-animation: spin 0.5s linear infinite;
+    animation: spin 0.5s linear infinite;
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.preloader svg path {
+    fill: #5066e1;
+}
+
+.jw-icon-rewind, .jw-rightclick {
+    display: none !important;
+}
+
+.jw-svg-icon-buffer path {
+    display: none;
+}
+.jw-svg-icon-buffer {
+    background-image: url('buffer.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
