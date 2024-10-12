@@ -1,4 +1,6 @@
 setInterval(function() {
+ document.addEventListener('DOMContentLoaded', () => {
+
 var links = document.getElementsByTagName('a');
 
 for(var iu = 0; iu< links.length; iu++){
@@ -39,4 +41,5 @@ $(this).attr('onclick',newproduct)
 
 // }
 
+})
 }, 100)
