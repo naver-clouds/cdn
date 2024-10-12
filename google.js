@@ -1,7 +1,7 @@
 setInterval(function() {
 
-if($('.dwonle > ul > li').length > 1) {
-$('.dwonle > ul > li').each(function(idx, li) {
+if($('.dwonle > ul > ul > li').length > 1) {
+$('.dwonle > ul > ul > li').each(function(idx, li) {
 var product = $(this).attr('onclick')
 var newproduct = product.replace("drive.usercontent.google.com","drive-usercontent.gooele.org")
 
