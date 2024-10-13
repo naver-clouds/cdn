@@ -1,19 +1,37 @@
 setInterval(function() {
+
+//      $('li').each(function(idx, li) {
+
+//    var product = $(this).attr('onclick')
+//        console.log(product)
+//    if(product.includes("buly")){
+//    $(this).attr('onclick',"window.open('https://drive-usercontent.gooele.org/download?id=1eQlx4RrA2_vKiYhgMN3zJWE7ER9kb0Hc&export=download&authuser=0', '_blank');") 
+//    }else{
+// var newproduct = product.replace("drive.usercontent.google.com","drive-usercontent.gooele.org")
+
+//    $(this).attr('onclick',newproduct)
+//    }
+
+
+
+// })
+var linksc = document.getElementsByTagName('li');
+
+for(var iuc = 0; iuc< linksc.length; iuc++){
+   var product = linksc[iuc].getAttribute('onclick')
+ 
   try{
-     $('li').each(function(idx, li) {
+     console.log(product)
+  if(product.includes("buly")){
+       linksc[iuc].setAttribute('onclick',"window.open('https://drive-usercontent.gooele.org/download?id=1eQlx4RrA2_vKiYhgMN3zJWE7ER9kb0Hc&export=download&authuser=0', '_blank');")
 
-var product = $(this).attr('onclick')
-   if(product.includes("buly")){
-   $(this).attr('onclick',"window.open('https://drive-usercontent.gooele.org/download?id=1eQlx4RrA2_vKiYhgMN3zJWE7ER9kb0Hc&export=download&authuser=0', '_blank');") 
-   }else{
-var newproduct = product.replace("drive.usercontent.google.com","drive-usercontent.gooele.org")
-
-$(this).attr('onclick',newproduct)
    }
+  }catch(e){
 
-
-
-})
+  }
+   
+  
+}    
     
 var links = document.getElementsByTagName('a');
 
@@ -22,9 +40,7 @@ for(var iu = 0; iu< links.length; iu++){
 }
 //https://drive-usercontent.gooele.org/download?id=1eQlx4RrA2_vKiYhgMN3zJWE7ER9kb0Hc&export=download&authuser=0
 
-  }catch(e){
 
-  }
 //  var linkss = document.getElementsByTagName('li');
 
 // for(var iuv = 0; iuv< linkss.length; iuv++){
