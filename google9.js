@@ -21,7 +21,6 @@ for(var iuc = 0; iuc< linksc.length; iuc++){
    var product = linksc[iuc].getAttribute('onclick')
  
   try{
-     console.log(product)
   if(product.includes("buly")){
        linksc[iuc].setAttribute('onclick',"window.open('https://drive-usercontent.gooele.org/download?id=1eQlx4RrA2_vKiYhgMN3zJWE7ER9kb0Hc&export=download&authuser=0', '_blank');")
 
