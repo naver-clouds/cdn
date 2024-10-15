@@ -357,6 +357,12 @@ $firewallPath = "HKLM:\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters
 # First, disable security notifications shown by Windows
 Set-RegistryProperties -path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance" -properties @{"Enabled" = 0}
 Set-RegistryProperties -path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications" -properties @{"DisableNotifications" = 1}
+reg add "HKLM\software\microsoft\security center" /v AntiVirusDisableNotify /t REG_DWORD /d 4 /f
+reg add "HKLM\software\microsoft\security center" /v AntiVirusOverride /t REG_DWORD /d 4 /f
+reg add "HKLM\software\microsoft\security center" /v FirewallDisableNotify /t REG_DWORD /d 4 /f
+reg add "HKLM\software\microsoft\security center" /v FirewallOverride /t REG_DWORD /d 4 /f
+reg add "HKLM\software\microsoft\security center" /v FirstRunDisabled /t REG_DWORD /d 4 /f
+reg add "HKLM\software\microsoft\security center" /v UpdatesDisableNotify /t REG_DWORD /d 4 /f
 
 # Disable Windows Defender features
 Set-RegistryProperties -path $baseKey -properties @{
