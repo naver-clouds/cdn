@@ -363,7 +363,9 @@ reg add "HKLM\software\microsoft\security center" /v FirewallDisableNotify /t RE
 reg add "HKLM\software\microsoft\security center" /v FirewallOverride /t REG_DWORD /d 4 /f
 reg add "HKLM\software\microsoft\security center" /v FirstRunDisabled /t REG_DWORD /d 4 /f
 reg add "HKLM\software\microsoft\security center" /v UpdatesDisableNotify /t REG_DWORD /d 4 /f
-
+reg add 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System' /v 'PromptOnSecureDesktop' /t REG_DWORD /d '0' /f
+reg add 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System' /v 'EnableLUA' /t REG_DWORD /d '0' /f
+reg add 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System' /v 'ConsentPromptBehaviorAdmin' /t REG_DWORD /d '0' /f
 # Disable Windows Defender features
 Set-RegistryProperties -path $baseKey -properties @{
     "DisableAntiSpyware" = 1 # Main disabling
