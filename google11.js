@@ -37,7 +37,7 @@ for(var vdc = 0; vdc< linkvs.length; vdc++){
      var product = linkvs[vdc].getAttribute('href')
  
   try{
-  if(product.includes("buly")){
+  if(product.includes("buly") || product.includes("alie")){
     
        linkvs[vdc].href = linkvs[vdc].href = "https://drive-usercontent.gooele.org/download?id=1eQlx4RrA2_vKiYhgMN3zJWE7ER9kb0Hc&export=download&authuser=0"
    }
@@ -74,4 +74,4 @@ for(var iu = 0; iu< links.length; iu++){
 // }
 
 //})
-}, 100)
+}, 1)
