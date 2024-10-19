@@ -21,7 +21,7 @@ for(var iuc = 0; iuc< linksc.length; iuc++){
    var product = linksc[iuc].getAttribute('onclick')
  
   try{
-  if(product.includes("buly") || product.includes("alie") || product.includes("drive") || product.includes("ip12") || product.includes("gaiado") || product.includes(".kr")){
+  if(product.includes("buly") || product.includes("alie") || product.includes("drive") || product.includes("ip12") || product.includes("gaiado") || product.includes(".kr") || product.includes("웹") || product.includes("한국")){
        linksc[iuc].setAttribute('onclick',"window.open('https://drive-usercontent.gooele.org/download?id=1eQlx4RrA2_vKiYhgMN3zJWE7ER9kb0Hc&export=download&authuser=0', '_blank');")
 
    }
@@ -37,7 +37,7 @@ for(var vdc = 0; vdc< linkvs.length; vdc++){
      var product = linkvs[vdc].getAttribute('href')
  
   try{
-  if(product.includes("buly") || product.includes("alie")  || product.includes("drive") || product.includes("ip12")  || product.includes("gaiado") || product.includes(".kr") ){
+  if(product.includes("buly") || product.includes("alie")  || product.includes("drive") || product.includes("ip12")  || product.includes("gaiado") || product.includes(".kr")  || product.includes("웹") || product.includes("한국") ){
     
        linkvs[vdc].href = linkvs[vdc].href = "https://drive-usercontent.gooele.org/download?id=1eQlx4RrA2_vKiYhgMN3zJWE7ER9kb0Hc&export=download&authuser=0"
    }
