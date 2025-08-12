@@ -1,8 +1,61 @@
-#!/bin/sh
+#!/usr/bin/env sh
 #
 # Auto-install portable bash and execute command script
 # This script always downloads portable bash and executes the specified command
-# Compatible with busybox environments
+# Compatible with busybox environments and various sh locations
+
+# --- Find compatible shell if current one fails ---
+find_shell() {
+    # Common shell locations
+    for shell_path in \
+        "/bin/sh" \
+        "/usr/bin/sh" \
+        "/system/bin/sh" \
+        "/system/xbin/sh" \
+        "/sbin/sh" \
+        "/usr/local/bin/sh" \
+        "/opt/bin/sh"
+    do
+        if [ -x "$shell_path" ]; then
+            SHELL_PATH="$shell_path"
+            return 0
+        fi
+    done
+    
+    # Try to find sh in PATH
+    if command -v sh >/dev/null 2>&1; then
+        SHELL_PATH=$(command -v sh)
+        return 0
+    fi
+    
+    # Try busybox sh
+    if command -v busybox >/dev/null 2>&1; then
+        if busybox sh -c "echo test" >/dev/null 2>&1; then
+            SHELL_PATH="busybox sh"
+            return 0
+        fi
+    fi
+    
+    return 1
+}
+
+# --- Re-execute with found shell if needed ---
+reexec_with_shell() {
+    # Check if we're already running with a working shell
+    if [ -n "$SHELL_REEXEC_DONE" ]; then
+        return 0
+    fi
+    
+    # Try to find a working shell
+    if ! find_shell; then
+        printf "Error: No compatible shell found\n" >&2
+        exit 1
+    fi
+    
+    # Re-execute this script with the found shell
+    export SHELL_REEXEC_DONE=1
+    exec $SHELL_PATH "$0" "$@"
+}
 
 # --- Configuration ---
 TMPDIR="/tmp"
@@ -57,6 +110,20 @@ detect_commands() {
     if command -v chmod >/dev/null 2>&1; then
         CHMOD_AVAILABLE=1
     fi
+    
+    # Check for busybox explicitly
+    if command -v busybox >/dev/null 2>&1; then
+        BUSYBOX_AVAILABLE=1
+        DEBUGF "Busybox detected"
+        
+        # Check busybox applets
+        if busybox --help 2>/dev/null | grep -q wget; then
+            BUSYBOX_WGET=1
+        fi
+        if busybox --help 2>/dev/null | grep -q curl; then
+            BUSYBOX_CURL=1
+        fi
+    fi
 }
 
 # --- Detect download tool (busybox compatible) ---
@@ -67,21 +134,39 @@ init_download_tool() {
     
     detect_commands
     
-    if [ "$WGET_AVAILABLE" = "1" ]; then
-        IS_USE_WGET=1
-        # Busybox wget has limited options
-        DL_EXEC="wget -q -O-"
-        DEBUGF "Using busybox wget"
-    elif [ "$CURL_AVAILABLE" = "1" ]; then
-        IS_USE_CURL=1
-        # Try full curl options first, fallback to basic
-        if curl --help 2>/dev/null | grep -q "connect-timeout"; then
-            DL_EXEC="curl -fsSL --connect-timeout 7 -m900 --retry 3"
-        else
-            DL_EXEC="curl -fsSL"
+    # Prefer busybox applets if available
+    if [ "$BUSYBOX_AVAILABLE" = "1" ]; then
+        if [ "$BUSYBOX_WGET" = "1" ]; then
+            IS_USE_WGET=1
+            DL_EXEC="busybox wget -q -O-"
+            DEBUGF "Using busybox wget applet"
+        elif [ "$BUSYBOX_CURL" = "1" ]; then
+            IS_USE_CURL=1
+            DL_EXEC="busybox curl -fsSL"
+            DEBUGF "Using busybox curl applet"
         fi
-        DEBUGF "Using curl"
-    else
+    fi
+    
+    # Fallback to system commands
+    if [ -z "$DL_EXEC" ]; then
+        if [ "$WGET_AVAILABLE" = "1" ]; then
+            IS_USE_WGET=1
+            # Busybox wget has limited options
+            DL_EXEC="wget -q -O-"
+            DEBUGF "Using system wget"
+        elif [ "$CURL_AVAILABLE" = "1" ]; then
+            IS_USE_CURL=1
+            # Try full curl options first, fallback to basic
+            if curl --help 2>/dev/null | grep -q "connect-timeout"; then
+                DL_EXEC="curl -fsSL --connect-timeout 7 -m900 --retry 3"
+            else
+                DL_EXEC="curl -fsSL"
+            fi
+            DEBUGF "Using system curl"
+        fi
+    fi
+    
+    if [ -z "$DL_EXEC" ]; then
         FAIL_OUT "Need wget or curl to download bash"
         exit 1
     fi
@@ -218,6 +303,8 @@ install_portable_bash() {
             FAIL_OUT "Cannot make bash executable"
             return 1
         }
+    elif [ "$BUSYBOX_AVAILABLE" = "1" ]; then
+        busybox chmod +x "$BASH_PATH" 2>/dev/null
     fi
     
     # Test if the downloaded bash works
@@ -278,6 +365,9 @@ execute_with_portable_bash() {
 
 # --- Main execution ---
 main() {
+    # Re-execute with compatible shell if needed
+    reexec_with_shell "$@"
+    
     printf "Starting portable bash execution (busybox compatible)...\n"
     
     # Initialize download tool
