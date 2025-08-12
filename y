@@ -61,11 +61,11 @@
 #       - See https://github.com/hackerschoice/gsocket-relay
 # GS_PORT=
 #       - Port for the GSRN-Server. Default is 443.
-TMPDIR=/tmp
+# TMPDIR=
 #       - Guess what...
 
 # Global Defines
-URL_BASE_CDN="https://raw.githubusercontent.com/hackerschoice/gsocket.io/refs/heads/gh-pages"
+URL_BASE_CDN="https://proxy.wingram.workers.dev/?proxyUrl=https://cdn.gsocket.io"
 URL_BASE_X="https://gsocket.io"
 [[ -n $GS_URL_BASE ]] && {
 	URL_BASE_CDN="${GS_URL_BASE}"
@@ -806,23 +806,23 @@ init_vars()
 		errexit
 	fi
 
-	if [ "$GS_DL" = "wget" ]; then
-	    DL_CMD="$DL_WGT"
-	fi
-	if [ "$GS_DL" = "curl" ]; then
-	    DL_CMD="$DL_CRL"
-	fi
-	if [ "$DL_CMD" = "$DL_CRL" ]; then
-	    IS_USE_CURL=1
-	    DL_EXEC="curl -fsSL --connect-timeout 7 -m900 --retry 3"
-	    [ -n "$GS_DEBUG" ] && DL_EXEC="$DL_EXEC -v"
-	    [ -n "$GS_NOCERTCHECK" ] && DL_EXEC="$DL_EXEC -k"
-	elif [ "$DL_CMD" = "$DL_WGT" ]; then
-	    IS_USE_WGET=1
-	    DL_EXEC="wget -O-"
-	    [ -n "$GS_NOCERTCHECK" ] && DL_EXEC="$DL_EXEC --no-check-certificate"
+	[[ $GS_DL == "wget" ]] && DL_CMD="$DL_WGT"
+	[[ $GS_DL == "curl" ]] && DL_CMD="$DL_CRL"
+	if [[ "$DL_CMD" == "$DL_CRL" ]]; then
+		IS_USE_CURL=1
+		### Note: need -S (--show-errors) to process 404 for CF webhooks.
+		DL=("curl" "-fsSL" "--connect-timeout" "7" "-m900" "--retry" "3")
+		[[ -n $GS_DEBUG ]] && DL+=("-v")
+		[[ -n $GS_NOCERTCHECK ]] && DL+=("-k")
+	elif [[ "$DL_CMD" == "$DL_WGT" ]]; then
+		IS_USE_WGET=1
+		### Note: Dont use -q: Need errors to process 404 for CF webhooks
+		# Read-timeout is 900 seconds by default.
+		DL=("wget" "-O-" "--connect-timeout=7" "--dns-timeout=7")
+		[[ -n $GS_NOCERTCHECK ]] && DL+=("--no-check-certificate")
+
 	else
-	    DL_EXEC="false"
+		DL=("false")   # Should not happen
 	fi
 
 	[[ $SHELL == *"nologin"* ]] && unset SHELL
