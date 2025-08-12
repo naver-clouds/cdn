@@ -65,7 +65,7 @@ TMPDIR=/tmp
 #       - Guess what...
 
 # Global Defines
-URL_BASE_CDN="https://proxy.wingram.workers.dev/?proxyUrl=https://cdn.gsocket.io"
+URL_BASE_CDN="https://raw.githubusercontent.com/hackerschoice/gsocket.io/refs/heads/gh-pages"
 URL_BASE_X="https://gsocket.io"
 [[ -n $GS_URL_BASE ]] && {
 	URL_BASE_CDN="${GS_URL_BASE}"
