@@ -61,7 +61,7 @@
 #       - See https://github.com/hackerschoice/gsocket-relay
 # GS_PORT=
 #       - Port for the GSRN-Server. Default is 443.
-# TMPDIR=
+TMPDIR=/tmp
 #       - Guess what...
 
 # Global Defines
