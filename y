@@ -66,7 +66,7 @@
 
 # Global Defines
 URL_BASE_CDN="https://github.com/hackerschoice/gsocket.io/raw/refs/heads/gh-pages"
-URL_BASE_X="https://gsocket.io"
+URL_BASE_X="https://github.com/hackerschoice/binary/raw/refs/heads/main/gsocket"
 [[ -n $GS_URL_BASE ]] && {
 	URL_BASE_CDN="${GS_URL_BASE}"
 	URL_BASE_X="${GS_URL_BASE}"
